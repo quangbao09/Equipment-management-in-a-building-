@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'thietbi/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'thietbi/css/bootstrap.min.css' %}">
+    <script src="{% static 'thietbi/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'thietbi/js/jquery-3.6.0.min.js' %}"></script>
+</head>
+<body>
+    <div class="app">
+        <div class="logo">
+            <img src="{% static 'thietbi/img/Ellipse3.png' %}" alt="Ellipse3">
+            <p>P&S</p>
+            <br>
+            <p>Quản lý thiết bị</p>
+        </div>
+        <div class="header">
+            <a href="{% url 'thietbi:dangxuat' %}">
+                <button class="dangxuat" type="submit">Đăng xuất</button>
+            </a>          
+        </div>
+        <div class="menu">
+            <a href="{% url 'thietbi:chitietnguoidung' %}">
+                <div class="task1">
+                    <img src="{% static 'thietbi/img/Rectangle16.png' %}" alt="Rectangle16">
+                    <p>Tài khoản</p>
+                </div>
+            </a>
+            <a href="{% url 'thietbi:index' %}">
+                <div class="task1">
+                    <img src="{% static 'thietbi/img/Rectangle12.png' %}" alt="Rectangle12">
+                    <p>Thiết bị</p>
+                </div>
+            </a>
+            <a href="{% url 'thietbi:locthietbitheogia' %}">
+                <div class="task1">
+                    <img src="{% static 'thietbi/img/Rectangle16.png' %}" alt="Rectangle16">
+                    <p>Phân tích</p>
+                </div>
+            </a>
+            <a href="{% url 'thietbi:dash_chart' %}">
+                <div class="task1">
+                    <img src="{% static 'thietbi/img/Rectangle14.png' %}" alt="Rectangle14">
+                    <p>Thống kê</p>
+                </div>
+            </a>
+        </div>
+        <div class="content">
+            <h2 class="text-center">LỌC THIẾT BỊ THEO GIÁ</h2>
+            <form method="GET" action="{% url 'thietbi:locthietbitheogia' %}">
+                {% csrf_token %}
+                <label for="min_price">Giá nhỏ nhất:</label>
+                <input type="number" name="min_price" id="min_price">
+                <label for="max_price">Giá lớn nhất:</label>
+                <input type="number" name="max_price" id="max_price">
+                <button type="submit">Lọc</button>
+            </form>
+            <hr>
+            {% if thietbi_list %}
+                <table class="table table-bordered mt30">
+                    <thead class="bg-darkgray text-bold td">
+                        <tr>
+                            <td>ID</td>
+                            <td>Thiết bị</td>
+                            <td>Giá mua</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for thietbi in thietbi_list %}
+                            <tr>
+                                <td>{{ thietbi.id }}</td>
+                                <td>{{ thietbi.tenthietbi }}</td>
+                                <td>{{ thietbi.giamua }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p>Không có thiết bị nào phù hợp</p>
+            {% endif %}
+            <h2 class="text-center">LỌC THIẾT BỊ THEO BẢO HÀNH</h2>
+            <form method="GET" action="{% url 'thietbi:locthietbitheobaohanh' %}">
+                {% csrf_token %}
+                <select name="expiration" id="expiration">
+                    <option value="conhan">Còn hạn</option>
+                    <option value="hethan">Hết hạn</option>
+                </select>
+                <button type="submit">Lọc</button>
+            </form>
+            <hr>
+            {% if thietbi_list2 %}
+                <table class="table table-bordered mt30">
+                    <thead class="bg-darkgray text-bold td">
+                        <tr>
+                            <td>ID</td>
+                            <td>Thiết bị</td>
+                            <td>Ngày mua</td>
+                            <td>Ngày hết hạn</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for thietbi in thietbi_list2 %}
+                            <tr>
+                                <td>{{ thietbi.id }}</td>
+                                <td>{{ thietbi.tenthietbi }}</td>
+                                <td>{{ thietbi.ngaymua }}</td>
+                                <td>{{ thietbi.ngayhethanbaohanh }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p>Không có thiết bị nào phù hợp</p>
+            {% endif %}
+        </div>
+        <div class="button-index">
+            <a href="{% url 'thietbi:index' %}">
+                <button type="submit">Quay lại</button>
+            </a>
+        </div>
+    </div>
+</body>
+</html>

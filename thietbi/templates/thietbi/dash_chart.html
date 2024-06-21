@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'thietbi/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'thietbi/css/bootstrap.min.css' %}">
+    <script src="{% static 'thietbi/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'thietbi/js/jquery-3.6.0.min.js' %}"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+    <div class="app">
+        <div class="logo">
+            <img src="{% static 'thietbi/img/Ellipse3.png' %}" alt="Ellipse3">
+            <p>P&S</p>
+            <br>
+            <p>Quản lý thiết bị</p>
+        </div>
+        <div class="header"></div>
+        <div class="menu">
+            <a href="{% url 'thietbi:chitietnguoidung' %}">
+                <div class="task1">
+                    <img src="{% static 'thietbi/img/Rectangle16.png' %}" alt="Rectangle16">
+                    <p>Tài khoản</p>
+                </div>
+            </a>
+            <a href="{% url 'thietbi:index' %}">
+                <div class="task1">
+                    <img src="{% static 'thietbi/img/Rectangle12.png' %}" alt="Rectangle12">
+                    <p>Thiết bị</p>
+                </div>
+            </a>
+            <a href="{% url 'thietbi:locthietbitheogia' %}">
+                <div class="task1">
+                    <img src="{% static 'thietbi/img/Rectangle16.png' %}" alt="Rectangle16">
+                    <p>Phân tích</p>
+                </div>
+            </a>
+            <a href="{% url 'thietbi:locthietbitheogia' %}">
+                <div class="task1">
+                    <img src="{% static 'thietbi/img/Rectangle14.png' %}" alt="Rectangle14">
+                    <p>Thống kê</p>
+                </div>
+            </a>
+        </div>
+        <div class="content">
+            <h2 class="text-center">THỐNG KÊ THIẾT BỊ</h2>
+            <div class="fig1">
+                <div>
+                    <label for="select-category">Chọn danh mục:</label>
+                    <select id="select-category">
+                        <option value="loai">Loại</option>
+                        <option value="phong">Phòng</option>
+                        <option value="nhacungcap">Nhà cung cấp</option>
+                    </select>
+                </div>
+                <div id="dash-chart"></div>
+            </div> 
+            <div class="fig2">
+                <div>
+                    <label for="select-category2">Chọn danh mục:</label>
+                    <select id="select-category2">
+                        <option value="loai">Loại</option>
+                        <option value="phong">Phòng</option>
+                        <option value="nhacungcap">Nhà cung cấp</option>
+                    </select>
+                </div>
+                <div id="dash-chart2"></div>
+            </div> 
+        </div>
+    </div>
+    <script>
+        function thongKe() {
+            var category = document.getElementById('select-category').value;
+            
+            $.get("{% url 'thietbi:dash_data' %}?category=" + category, function(data) {
+                var chartData = {
+                    x: data.map(item => item.category),
+                    y: data.map(item => item.total_value),
+                    type: 'bar'
+                };
+
+                var layout = {
+                    title: 'Tổng giá trị sản phẩm',
+                    xaxis: {
+                        title: 'Danh mục'
+                    },
+                    yaxis: {
+                        title: 'Tổng giá trị'
+                    }
+                };
+
+                Plotly.newPlot('dash-chart', [chartData], layout);
+            });
+        }
+
+        $(document).ready(function() {
+            var selectCategory = document.getElementById("select-category");
+            
+            selectCategory.addEventListener("change", function() {
+                thongKe();
+            });
+            thongKe();
+        });
+
+        function thongKe2() {
+            var category = document.getElementById('select-category2').value;
+            
+            $.get("{% url 'thietbi:dash_data2' %}?category=" + category, function(data) {
+                var chartData = {
+                    x: data.map(item => item.category),
+                    y: data.map(item => item.count),
+                    type: 'bar'
+                };
+    
+                var layout = {
+                    title: 'Số lượng thiết bị',
+                    xaxis: {
+                        title: 'Danh mục'
+                    },
+                    yaxis: {
+                        title: 'Số lượng'
+                    }
+                };
+    
+                Plotly.newPlot('dash-chart2', [chartData], layout);
+            });
+        }
+    
+        $(document).ready(function() {
+            var selectCategory2 = document.getElementById("select-category2");
+            
+            selectCategory2.addEventListener("change", function() {
+                thongKe2();
+            });
+            thongKe2();
+        });
+    </script>
+</body>
+</html>

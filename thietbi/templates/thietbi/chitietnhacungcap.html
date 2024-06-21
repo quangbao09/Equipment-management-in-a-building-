@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'thietbi/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'thietbi/css/bootstrap.min.css' %}">
+    <script src="{% static 'thietbi/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'thietbi/js/jquery-3.6.0.min.js' %}"></script>
+</head>
+<body>
+    <div class="app">
+        <div class="logo">
+            <img src="{% static 'thietbi/img/Ellipse3.png' %}" alt="Ellipse3">
+            <p>P&S</p>
+            <br>
+            <p>Quản lý thiết bị</p>
+        </div>
+        <div class="header">
+            <a href="{% url 'thietbi:dangxuat' %}">
+                <button class="dangxuat" type="submit">Đăng xuất</button>
+            </a>
+        </div>
+        <div class="menu">
+            <a href="{% url 'thietbi:chitietnguoidung' %}">
+                <div class="task1">
+                    <img src="{% static 'thietbi/img/Rectangle16.png' %}" alt="Rectangle16">
+                    <p>Tài khoản</p>
+                </div>
+            </a>
+            <a href="{% url 'thietbi:index' %}">
+                <div class="task1">
+                    <img src="{% static 'thietbi/img/Rectangle12.png' %}" alt="Rectangle12">
+                    <p>Thiết bị</p>
+                </div>
+            </a>
+            <a href="{% url 'thietbi:locthietbitheogia' %}">
+                <div class="task1">
+                    <img src="{% static 'thietbi/img/Rectangle16.png' %}" alt="Rectangle16">
+                    <p>Phân tích</p>
+                </div>
+            </a>
+            <a href="{% url 'thietbi:dash_chart' %}">
+                <div class="task1">
+                    <img src="{% static 'thietbi/img/Rectangle14.png' %}" alt="Rectangle14">
+                    <p>Thống kê</p>
+                </div>
+            </a>
+        </div>
+        <div class="content">
+            <h2 class="text-center">CHI TIẾT NHÀ CUNG CẤP: {{ nhacungcap.tennhacungcap }}</h2>
+            <form method="POST" action="{% url 'thietbi:chitietnhacungcap' nhacungcap.id %}">
+                {% csrf_token %}
+                {{ form.as_p }} 
+                {% if fL.errors %}
+                    <ul class="error-list">
+                        {% for field, errors in fL.errors.items %}
+                            {% for error in errors %}
+                                <li><span class="error-message">{{ error }}</span></li>
+                            {% endfor %}
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+                {% if messages %}
+                    <ul class="messages">
+                        {% for message in messages %}
+                            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+                <button type="submit">Lưu</button>
+            </form>
+            <form class="xoa-form" method="POST" action="{% url 'thietbi:xoanhacungcap' nhacungcap.id %}">
+                {% csrf_token %}
+                <button class="delete" type="button" onclick="confirmDelete()">Xóa</button>
+            </form>
+            <a href="{% url 'thietbi:nhacungcap' %}">
+                <button class="back" type="submit">Quay lại</button>
+            </a>
+        </div>
+    </div>
+    <script>
+        document.querySelector('.delete').addEventListener('click', function() {
+            if (confirm('Bạn có chắc chắn muốn xóa nhà cung cấp này?')) {
+                document.querySelector('.xoa-form').submit();
+            }
+        });
+    </script>
+</body>
+</html>

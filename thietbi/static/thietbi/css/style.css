@@ -1,0 +1,212 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.app {
+    height: 100vh;
+    width: 100vw;
+}
+
+.logo {
+    height: 10vh;
+    width: 15vw;
+    float: left;
+    background-color: #10507E;
+}
+
+.logo img {
+    height: 100%;
+    width: 30%;
+    float: left;
+    margin-right: 20px;
+}
+
+.logo p {
+    float: right;
+    color: #fff;
+    font-size: 15px;
+    margin-bottom: 0;
+}
+
+.header {
+    height: 10vh;
+    width: 85vw;
+    float: right;
+}
+
+.menu {
+    height: 90vh;
+    width: 15vw;
+    float: left;
+    background-color: #10507E;
+}
+
+.menu .task1 {
+    height: 8vh;
+    width: 15vw;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    margin-top: 20px;
+}
+
+.menu .task1:hover {
+    background-color: #ccc;
+    cursor: pointer;
+}
+
+.menu img {
+    height: 100%;
+    width: 15%;
+    float: left;
+    margin-left: 10px;
+    margin-right: 50px;
+}
+
+.menu p {
+    color: #fff;
+    font-size: 22px;
+    float: left;
+}
+
+.content {
+    overflow: auto;
+    height: 80vh;
+    width: 85vw;
+    float: right;
+}
+
+form {
+    padding-top: 20px;
+}
+
+form p {
+    display: inline-block;
+    padding-right: 20px;
+}
+
+form .ngaythem {
+    display: block;
+}
+
+form button {
+    padding: 5px 36px;
+    margin-left: 90%;
+}
+
+ul.errorlist {
+    display: none;
+}
+
+ul.errorlist.nonfield {
+    display: none;
+}
+
+.error-message {
+    color: red;
+    font-weight: bold;
+    padding: 0;
+}
+
+.messages li {
+    margin-left: 90%;
+    color: rgb(18, 230, 60);
+}
+
+.mt30 {
+    margin-top: 30px;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.bg-darkgray {
+    background-color: darkgray;
+}
+
+.text-bold td {
+    font-weight: bold;
+}
+
+.back {
+    padding: 5px 20px;
+    margin-left: 90%;
+    margin-top: 5px;
+}
+
+.xoa-form .delete {
+    display: block;
+    padding: 5px 35px;
+    margin-left: 90%;
+    margin-top: -15px;
+}
+
+.loai {
+    padding: 5px 15px;
+    background-color: #ccc;
+    display: inline-block;
+}
+
+.button-index {
+    height: 10vh;
+    width: 85vw;
+}
+
+.button-index a {
+    text-decoration: none;
+}
+
+.button-index button {
+    padding: 3px 30px;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+.button-index button:hover {
+    background-color: #ccc;
+    cursor: pointer;
+}
+
+.themloai {
+    display: block;
+    padding: 3px 15px;
+    margin: 5px;
+}
+
+.form-search,
+.form-sort {
+    display: inline-block;
+    height: 100%;
+    padding: 5px;
+}
+
+.form-search .form-search-btn,
+.form-sort .form-sort-btn {
+    margin: 0;
+    padding: 0;
+}
+
+.form-search .form-search-btn:hover,
+.form-sort .form-sort-btn:hover,
+.dangxuat:hover {
+    background-color: #ccc;
+    cursor: pointer;
+}
+
+.dangxuat {
+    float: right;
+    margin: 5px;
+}
+
+.quaylai {
+    padding: 3px 15px;
+    margin: 5px;
+}
+
+.fig1, 
+.fig2 {
+    height: 80vh;
+    width: 80vw;
+}

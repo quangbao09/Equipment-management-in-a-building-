@@ -1,0 +1,102 @@
+body {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.background {
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    background-image: url("../img/anhbaotri.png");
+    position: relative;
+}
+
+.logo .box {
+    height: 10%;
+    width: 20%;
+    background-color: #10507E;
+    position: absolute;
+    top: 5%;
+    left: 1%;
+    overflow: auto;
+    overflow: hidden;
+}
+
+.logo .box img {
+    height: 100%;
+    width: 30%;
+    float: left;
+    margin-right: 20px;
+}
+
+.logo .box p {
+    margin-top: 0;
+    margin-bottom: 0;
+    float: right;
+    color: #fff;
+    font-size: 24px;
+    padding: 5px 0;
+}
+
+.form-register .box {
+    height: 100%;
+    width: 44%;
+    background-color: #29F2FF;
+    position: absolute;
+    top: 0;
+    right: 0;
+    opacity: 0.9;
+}
+
+.form-register .box h2 {
+    text-align: center;
+    font-size: 30px;
+    padding-top: 5%;
+}
+
+.form-register .box form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form-register .box form label {
+    display: block;
+}
+
+.form-register .box form input[type="text"],
+.form-register .box form input[type="password"],
+.form-register .box form input[type="email"] {
+    width: 500px;
+    font-size: 14px;
+    padding: 10px;
+}
+
+.form-register .box form input[type="submit"] {
+    font-size: 20px;
+    font-weight: 700;
+    border-radius: 10px; 
+    border: 2px solid white;
+    padding: 15px 70px;
+    margin-top: 5%;
+}
+
+.form-register .box form input[type="submit"]:hover {
+    opacity: 0.8;
+    cursor: pointer;
+}
+
+ul.errorlist {
+    display: none;
+}
+
+ul.errorlist.nonfield {
+    display: none;
+}
+
+.error-message {
+    color: red;
+    font-weight: bold;
+    padding: 0;
+}
